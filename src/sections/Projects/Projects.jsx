@@ -1,20 +1,20 @@
 import { motion } from "framer-motion"
 import { FiArrowUpRight, FiGithub, FiExternalLink } from "react-icons/fi"
 import { Link } from "react-router-dom"
-
+import img1 from "../../assets/p1.png"
 export default function Projects() {
     const projects = [
         {
             number: "01",
-            slug: "roadcom",
-            title: "RoadCom",
-            category: "Web Application",
+            slug: "dashboard",
+            title: "Product Management Dashboard",
+            category: "Admin Dashboard",
             description:
-                "A modern transportation platform built with React, focusing on a clean user experience, responsive design and reusable components.",
-            image: "/projects/roadcom.png",
-            technologies: ["React", "Tailwind CSS", "JavaScript"],
-            github: "#",
-            live: "#"
+                "A professional product management dashboard built with React, featuring full CRUD operations, search, filtering, pagination, stock analytics and a responsive modern interface.",
+            image: img1,
+            technologies: ["React", "Tailwind CSS", "JavaScript", "Recharts"],
+            github: "https://github.com/ziadmoamd/dashboard",
+            live: "https://dashboard-eight-omega-50.vercel.app/"
         },
 
         {

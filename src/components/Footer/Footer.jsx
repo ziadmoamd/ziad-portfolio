@@ -33,12 +33,12 @@ export default function Footer() {
         {
             name: "GitHub",
             icon: FiGithub,
-            href: "#"
+            href: "https://github.com/ziadmoamd"
         },
         {
             name: "LinkedIn",
             icon: FiLinkedin,
-            href: "#"
+            href: "https://www.linkedin.com/in/ziad-mohamed-abrahim-98a0732b0/"
         }
     ]
 

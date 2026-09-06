@@ -1,13 +1,18 @@
+import { useState } from "react"
+import emailjs from "@emailjs/browser"
 import { motion } from "framer-motion"
 import { FiMail, FiMapPin, FiSend, FiGithub, FiLinkedin, FiArrowUpRight } from "react-icons/fi"
 
 export default function Contact() {
+    const [loading, setLoading] = useState(false)
+    const [status, setStatus] = useState("")
+
     const contactInfo = [
         {
             icon: FiMail,
             title: "Email",
-            value: "ziadabrahimamir@email.com",
-            href: "mailto:ziadabrahimamir@email.com"
+            value: "ziadabrahimamir@gmail.com",
+            href: "mailto:ziadabrahimamir@gmail.com"
         },
         {
             icon: FiMapPin,
@@ -21,14 +26,51 @@ export default function Contact() {
         {
             icon: FiGithub,
             name: "GitHub",
-            href: "#"
+            href: "https://github.com/ziadmoamd"
         },
         {
             icon: FiLinkedin,
             name: "LinkedIn",
-            href: "#"
+            href: "https://www.linkedin.com/in/ziad-mohamed-abrahim-98a0732b0/"
         }
     ]
+
+    const sendEmail = async (e) => {
+        e.preventDefault()
+
+        setLoading(true)
+        setStatus("")
+
+        const form = e.currentTarget
+
+        const templateParams = {
+            name: form.name.value,
+            email: form.email.value,
+            title: form.subject.value,
+            message: form.message.value,
+            time: new Date().toLocaleString()
+        }
+
+        try {
+            await emailjs.send(
+                "service_m3glb9q",
+                "template_5cf1zfn",
+                templateParams,
+                "KTAhvh1nFs_mw1DB9"
+            )
+
+            setStatus("Message sent successfully! 🚀")
+            form.reset()
+        } catch (error) {
+            console.log("FULL EMAILJS ERROR:", error)
+            console.log("STATUS:", error?.status)
+            console.log("TEXT:", error?.text)
+
+            setStatus(error?.text || "Something went wrong. Please try again.")
+        } finally {
+            setLoading(false)
+        }
+    }
 
     return (
         <section
@@ -237,7 +279,9 @@ export default function Contact() {
                             </h3>
                         </div>
 
-                        <form className="space-y-6">
+                        <form
+                            onSubmit={sendEmail}
+                            className="space-y-6">
                             {/* Name */}
                             <div>
                                 <label
@@ -248,8 +292,10 @@ export default function Contact() {
 
                                 <input
                                     id="name"
+                                    name="name"
                                     type="text"
                                     placeholder="Your name"
+                                    required
                                     className="w-full rounded-xl border border-white/10 bg-white/[0.02] px-4 py-3.5 text-sm text-white outline-none transition-all duration-300 placeholder:text-zinc-700 focus:border-red-600/50 focus:bg-white/[0.03]"
                                 />
                             </div>
@@ -264,8 +310,10 @@ export default function Contact() {
 
                                 <input
                                     id="email"
+                                    name="email"
                                     type="email"
                                     placeholder="your@email.com"
+                                    required
                                     className="w-full rounded-xl border border-white/10 bg-white/[0.02] px-4 py-3.5 text-sm text-white outline-none transition-all duration-300 placeholder:text-zinc-700 focus:border-red-600/50 focus:bg-white/[0.03]"
                                 />
                             </div>
@@ -280,8 +328,10 @@ export default function Contact() {
 
                                 <input
                                     id="subject"
+                                    name="subject"
                                     type="text"
                                     placeholder="Project subject"
+                                    required
                                     className="w-full rounded-xl border border-white/10 bg-white/[0.02] px-4 py-3.5 text-sm text-white outline-none transition-all duration-300 placeholder:text-zinc-700 focus:border-red-600/50 focus:bg-white/[0.03]"
                                 />
                             </div>
@@ -296,27 +346,45 @@ export default function Contact() {
 
                                 <textarea
                                     id="message"
+                                    name="message"
                                     rows="6"
                                     placeholder="Tell me about your project..."
+                                    required
                                     className="w-full resize-none rounded-xl border border-white/10 bg-white/[0.02] px-4 py-3.5 text-sm text-white outline-none transition-all duration-300 placeholder:text-zinc-700 focus:border-red-600/50 focus:bg-white/[0.03]"
                                 />
                             </div>
 
+                            {/* Status */}
+                            {status && (
+                                <p
+                                    className={`text-center text-sm ${
+                                        status.includes("successfully") ? "text-green-500" : (
+                                            "text-red-500"
+                                        )
+                                    }`}>
+                                    {status}
+                                </p>
+                            )}
+
                             {/* Submit */}
                             <motion.button
                                 type="submit"
+                                disabled={loading}
                                 whileHover={{
                                     y: -2
                                 }}
                                 whileTap={{
                                     scale: 0.98
                                 }}
-                                className="group flex w-full items-center justify-center gap-3 rounded-xl bg-red-600 px-6 py-4 text-sm font-medium text-white transition-all duration-300 hover:bg-red-700 hover:shadow-[0_0_30px_rgba(220,38,38,0.2)]">
-                                Send Message
-                                <FiSend
-                                    size={17}
-                                    className="transition-transform duration-300 group-hover:translate-x-1"
-                                />
+                                className="group flex w-full items-center justify-center gap-3 rounded-xl bg-red-600 px-6 py-4 text-sm font-medium text-white transition-all duration-300 hover:bg-red-700 hover:shadow-[0_0_30px_rgba(220,38,38,0.2)] disabled:cursor-not-allowed disabled:opacity-60">
+                                {loading ? "Sending..." : "Send Message"}
+
+                                {!loading && (
+                                    <FiSend
+                                        size={17}
+                                        className="transition-transform duration-300 group-hover:translate-x-1"
+                                    />
+                                )}
                             </motion.button>
                         </form>
                     </motion.div>
@@ -345,7 +413,7 @@ export default function Contact() {
                     </p>
 
                     <a
-                        href="mailto:your@email.com"
+                        href="mailto:ziadabrahimamir@gmail.com"
                         className="mt-3 inline-flex items-center gap-2 text-lg font-medium text-zinc-400 transition-colors hover:text-white">
                         Let's make it happen.
                         <FiArrowUpRight

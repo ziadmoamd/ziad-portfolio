@@ -214,7 +214,7 @@ export default function Hero() {
 
                             {/* CV */}
                             <a
-                                href="/cv/Ziad-CV.pdf"
+                                href="public/cv/Ziad_Mohamed_Abrahim_Frontend_Instructor_CV.docx"
                                 download
                                 className="flex items-center gap-3 rounded-lg border border-white/10 px-6 py-3.5 font-medium text-zinc-300 transition-all duration-300 hover:border-red-600 hover:text-white">
                                 Download CV

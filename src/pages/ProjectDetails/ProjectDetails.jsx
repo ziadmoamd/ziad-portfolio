@@ -1,36 +1,41 @@
 import { Link, useParams } from "react-router-dom"
 import { motion } from "framer-motion"
 import { FiArrowLeft, FiGithub, FiExternalLink, FiCheck } from "react-icons/fi"
-
+import img1 from "../../assets/p1.png"
 const projects = [
     {
-        slug: "roadcom",
+        slug: "dashboard",
         number: "01",
-        title: "RoadCom",
-        category: "Web Application",
-        subtitle: "Transportation Platform",
+        title: "Product Management Dashboard",
+        category: "Admin Dashboard",
+        subtitle: "Product Management Platform",
 
-        image: "/projects/roadcom.png",
+        image: img1,
 
         description:
-            "RoadCom is a modern transportation web application focused on providing a clean, responsive and intuitive experience for users.",
+            "A professional product management dashboard built with React, designed to manage products efficiently through a clean, responsive and intuitive interface.",
 
         overview:
-            "The project was built with a strong focus on reusable components, responsive layouts and a smooth user experience across different screen sizes.",
+            "The project focuses on building a complete product management experience with reusable React components, centralized state management, persistent data and interactive analytics.",
 
-        technologies: ["React", "Tailwind CSS", "JavaScript", "Git"],
+        technologies: ["React", "Tailwind CSS", "JavaScript", "React Hook Form", "Recharts", "Git"],
 
         features: [
-            "Responsive design",
-            "Reusable React components",
-            "Modern user interface",
-            "Interactive navigation",
-            "API integration",
-            "Mobile-friendly experience"
+            "Full product CRUD operations",
+            "Product search and filtering",
+            "Stock status management",
+            "Pagination and sorting",
+            "Product image management",
+            "Stock analytics with interactive charts",
+            "Form validation",
+            "Toast notifications",
+            "Delete confirmation modal",
+            "Responsive dashboard interface",
+            "LocalStorage data persistence"
         ],
 
-        github: "#",
-        live: "#"
+        github: "https://github.com/ziadmoamd/dashboard",
+        live: "https://dashboard-eight-omega-50.vercel.app/"
     },
 
     {

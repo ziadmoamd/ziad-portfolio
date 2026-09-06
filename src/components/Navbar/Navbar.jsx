@@ -40,14 +40,14 @@ export default function Navbar() {
                     {/* Social + CTA */}
                     <div className="hidden items-center gap-4 md:flex">
                         <a
-                            href="#"
+                            href="https://github.com/ziadmoamd"
                             aria-label="GitHub"
                             className="text-zinc-400 transition-colors hover:text-red-500">
                             <FiGithub size={19} />
                         </a>
 
                         <a
-                            href="#"
+                            href="https://www.linkedin.com/in/ziad-mohamed-abrahim-98a0732b0/"
                             aria-label="LinkedIn"
                             className="text-zinc-400 transition-colors hover:text-red-500">
                             <FiLinkedin size={19} />
